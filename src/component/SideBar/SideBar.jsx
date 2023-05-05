@@ -1,6 +1,8 @@
 import React from 'react';
+import { BsFillTrashFill } from 'react-icons/bs'
+import { AiOutlinePlus } from 'react-icons/ai'
 
-const SideBar = ({ notes, onAddNote, onDeleteNote, activeNote, setActiveNote }) => {
+const SideBar = ({ notes, onAddNote, onDeleteNote, activeNote, setActiveNote, handleOk }) => {
     const dateObj = {
         hour: '2-digit',
         minute: '2-digit',
@@ -12,7 +14,7 @@ const SideBar = ({ notes, onAddNote, onDeleteNote, activeNote, setActiveNote }) 
         <div className='app-sidebar'>
             <div className="app-sidebar-header">
                 <h1> Notes </h1>
-                <button onClick={onAddNote}> Add </button>
+                <AiOutlinePlus style={{cursor: 'pointer'}} size={27} onClick={onAddNote}> Add </AiOutlinePlus>
             </div>
             <div className="app-sidebar-notes">
                 {sortedNotes.map((note) => {
@@ -25,11 +27,13 @@ const SideBar = ({ notes, onAddNote, onDeleteNote, activeNote, setActiveNote }) 
                         >
                             <div className='sidebar-note-title'>
                                 <strong>{ title }</strong>
-                                <button
+                                <BsFillTrashFill
+                                    size={27}
                                     onClick={() => onDeleteNote(id)}
+                                    // onClick={}
                                 >
                                         Delete
-                                </button>
+                                </BsFillTrashFill>
                             </div>
 
                             <p> { body && note.body.substring(0, 100)} </p>

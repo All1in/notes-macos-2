@@ -1,29 +1,16 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 
-const MyModal = () => {
-    const [visible, setVisible] = useState(false);
-
-    const handleOk = () => {
-        setVisible(false);
-    };
-
-    const handleCancel = () => {
-        setVisible(false);
-    };
-
+const MyModal = ({visible, setVisible, handleOk, handleCancel, text }) => {
     return (
         <>
-            <Button type="primary" onClick={() => setVisible(true)}>
-                Open Modal
-            </Button>
             <Modal
                 title="Basic Modal"
-                visible={visible}
+                open={visible}
                 onOk={handleOk}
                 onCancel={handleCancel}
             >
-                <p>Some modal content goes here.</p>
+                <p>{text}</p>
             </Modal>
         </>
     );

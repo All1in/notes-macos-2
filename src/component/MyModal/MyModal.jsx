@@ -10,7 +10,7 @@ const MyModal = ({visible, setVisible, handleOk, handleCancel, text }) => {
                 onOk={handleOk}
                 onCancel={handleCancel}
             >
-                <p>{text}</p>
+                <p>{ text }</p>
             </Modal>
         </>
     );

@@ -1,23 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BsFillTrashFill } from 'react-icons/bs'
 import { AiOutlinePlus } from 'react-icons/ai'
+import {AppContext} from "../../AppContext";
 
-const SideBar = ({ notes, onAddNote, onDeleteNote, activeNote, setActiveNote, handleOk }) => {
+const SideBar = ({ onAddNote, onDeleteNote, activeNote, setActiveNote }) => {
     const dateObj = {
         hour: '2-digit',
         minute: '2-digit',
     }
 
-    const sortedNotes = notes.sort((a, b) => b.lastModified - a.lastModified)
+    const { filteredValues } = useContext(AppContext)
 
     return (
         <div className='app-sidebar'>
             <div className="app-sidebar-header">
                 <h1> Notes </h1>
-                <AiOutlinePlus style={{cursor: 'pointer'}} size={27} onClick={onAddNote}> Add </AiOutlinePlus>
+                <AiOutlinePlus
+                    style={{cursor: 'pointer'}}
+                    size={27}
+                    onClick={onAddNote}
+                >
+                    Add
+                </AiOutlinePlus>
             </div>
             <div className="app-sidebar-notes">
-                {sortedNotes.map((note) => {
+                {filteredValues.map((note) => {
                     const { id, title, body, lastModified } = note
                     return (
                         <div

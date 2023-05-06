@@ -1,12 +1,16 @@
 import React from 'react';
 
-const SearchBox = () => {
+const SearchBox = ({ searchedValues, setSearchedValues }) => {
+    const changeSearchVal = (event) => setSearchedValues(event.target.value)
+
     return (
         <div>
             <input
+                style={{ padding: '10px', margin: '50px' }}
                 type='text'
-                placeholder='Search...'
-                // onChange={(event) => }
+                placeholder='Search by notes title...'
+                value={searchedValues}
+                onChange={changeSearchVal}
             />
         </div>
     );

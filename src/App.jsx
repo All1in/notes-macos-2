@@ -1,18 +1,23 @@
 import SideBar from "./component/SideBar/SideBar";
-import Main from "./component/Main/Main";
-import { useEffect, useState } from "react";
 import MyModal from "./component/MyModal/MyModal";
+import SearchBox from "./component/SearchBox/SearchBox";
+import Workspace from "./component/Workspace/Workspace";
+import { useEffect, useState } from "react";
 import uuid from "react-uuid";
-import { MyContext } from "./AppContext";
+import { AppContext } from "./AppContext";
 import './styles/App.css';
 
 const App = () => {
   const [notes, setNotes] = useState(JSON.parse(localStorage.notes) || [])
-  const [searchedValues, setSearchedValues] = useState()
+  const [searchedValues, setSearchedValues] = useState('')
   const [activeNote, setActiveNote] = useState(false)
   const [visible, setVisible] = useState(false)
 
-  const handleOk = (id) => {
+  const filteredValues = notes.filter((note) => {
+    return note.title.toLowerCase().includes(searchedValues.toLowerCase())
+  })
+
+  const handleOk = () => {
     // setActiveNote(id)
     setVisible(false)
   }
@@ -55,7 +60,8 @@ const App = () => {
   }, [notes])
 
   return (
-      <MyContext.Provider value={{
+      <AppContext.Provider value={{
+          filteredValues,
           visible,
           setVisible,
           handleOk,
@@ -71,16 +77,20 @@ const App = () => {
                   setActiveNote={setActiveNote}
                   setVisible={setVisible}
               />
-              <Main activeNote={getActiveNote()} onUpdateNote={onUpdateNote} />
-              <MyModal
-                  // visible={visible}
-                  // setVisible={setVisible}
-                  // handleOk={handleOk}
-                  // handleCancel={handleCancel}
-                  text='U sure u wanna delete that?'
-              />
+                  <SearchBox
+                      searchedValues={searchedValues}
+                      setSearchedValues={setSearchedValues}
+                  />
+                  <Workspace activeNote={getActiveNote()} onUpdateNote={onUpdateNote} />
+                  <MyModal
+                      // visible={visible}
+                      // setVisible={setVisible}
+                      // handleOk={handleOk}
+                      // handleCancel={handleCancel}
+                      text='U sure u wanna delete that?'
+                  />
           </div>
-      </MyContext.Provider>
+      </AppContext.Provider>
   );
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactMarkdown from "react-markdown"
 
-const Main = ({ activeNote, onUpdateNote }) => {
+const Workspace = ({ activeNote, onUpdateNote }) => {
     const onEditField = (key, value) => {
         onUpdateNote({
             ...activeNote,
@@ -11,7 +11,7 @@ const Main = ({ activeNote, onUpdateNote }) => {
     }
 
     if(!activeNote) return <div className='no-active-note'> No note Selected </div>
-
+    const { title, body } = activeNote
     return (
         <div className='app-main'>
             <div className='app-main-note-edit'>
@@ -30,8 +30,14 @@ const Main = ({ activeNote, onUpdateNote }) => {
                     onChange={(e) => onEditField('body', e.target.value)}
                 />
             </div>
+            <div className="app-main-note-preview">
+                <h1 className="preview-title">{ title }</h1>
+                <ReactMarkdown className="markdown-preview">
+                    { body }
+                </ReactMarkdown>
+            </div>
         </div>
     );
 };
 
-export default Main;
+export default Workspace;

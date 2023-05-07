@@ -6,7 +6,7 @@ const SearchBox = ({ searchedValues, setSearchedValues }) => {
     return (
         <div>
             <input
-                style={{ padding: '10px', margin: '50px' }}
+                style={{ padding: '10px' }}
                 type='text'
                 placeholder='Search by notes title...'
                 value={searchedValues}

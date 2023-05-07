@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { BsFillTrashFill } from 'react-icons/bs'
 import { AiOutlinePlus } from 'react-icons/ai'
-import {AppContext} from "../../AppContext";
+import { AppContext } from "../../AppContext";
+import SearchBox from "../SearchBox/SearchBox";
 
 const SideBar = ({ onAddNote, onDeleteNote, activeNote, setActiveNote }) => {
     const dateObj = {
@@ -9,12 +10,19 @@ const SideBar = ({ onAddNote, onDeleteNote, activeNote, setActiveNote }) => {
         minute: '2-digit',
     }
 
-    const { filteredValues } = useContext(AppContext)
+    const {
+        filteredValues,
+        searchedValues,
+        setSearchedValues
+    } = useContext(AppContext)
 
     return (
         <div className='app-sidebar'>
             <div className="app-sidebar-header">
-                <h1> Notes </h1>
+                <SearchBox
+                    searchedValues={searchedValues}
+                    setSearchedValues={setSearchedValues}
+                />
                 <AiOutlinePlus
                     style={{cursor: 'pointer'}}
                     size={27}
@@ -37,7 +45,6 @@ const SideBar = ({ onAddNote, onDeleteNote, activeNote, setActiveNote }) => {
                                 <BsFillTrashFill
                                     size={27}
                                     onClick={() => onDeleteNote(id)}
-                                    // onClick={}
                                 >
                                         Delete
                                 </BsFillTrashFill>

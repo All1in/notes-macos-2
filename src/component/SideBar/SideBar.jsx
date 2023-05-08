@@ -4,7 +4,12 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import { AppContext } from "../../AppContext";
 import SearchBox from "../SearchBox/SearchBox";
 
-const SideBar = ({ onAddNote, onDeleteNote, activeNote, setActiveNote }) => {
+const SideBar = ({
+  onAddNote,
+  onDeleteNote,
+  activeNote,
+  setActiveNote
+}) => {
     const dateObj = {
         hour: '2-digit',
         minute: '2-digit',
@@ -13,7 +18,7 @@ const SideBar = ({ onAddNote, onDeleteNote, activeNote, setActiveNote }) => {
     const {
         filteredValues,
         searchedValues,
-        setSearchedValues
+        setSearchedValues,
     } = useContext(AppContext)
 
     return (
